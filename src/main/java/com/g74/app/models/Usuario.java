@@ -1,58 +1,43 @@
 package com.g74.app.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
-    private long id;
+
+    //maven lombok se utilizo para optimizar los getters y los setters
+    @Id
+    @Getter @Setter @Column(name = "id_usuario")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private long id_usuario;
+
+    @Getter @Setter @Column(name = "nombre")
     private String nombre;
+
+    @Getter @Setter @Column(name = "apellidos")
     private String apellido;
+
+    @Getter @Setter @Column(name = "email")
     private String email;
+
+    @Getter @Setter @Column(name = "telefono")
     private String telefono;
-    private String password;
 
-    public long getId() {
-        return id;
-    }
+    @Getter @Setter @Column(name = "contraseña")
+    private String contraseña;
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
+    public Usuario(String nombre, String apellido, String email, String contraseña) {
         this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
         this.apellido = apellido;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
+        this.contraseña = contraseña;
     }
 
-    public String getTelefono() {
-        return telefono;
-    }
+    public Usuario() {
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
