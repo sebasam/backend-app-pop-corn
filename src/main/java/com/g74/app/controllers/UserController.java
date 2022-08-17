@@ -2,12 +2,14 @@ package com.g74.app.controllers;
 
 import com.g74.app.dao.UsuarioDao;
 import com.g74.app.models.Usuario;
+import com.g74.app.utils.JWTUtil;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -16,6 +18,14 @@ public class UserController {
     @Autowired
     private UsuarioDao usuariodao;
     private EntityManager entityManager;
+
+    @Autowired
+    private JWTUtil jwtutil;
+
+    private boolean validarToken(String token){
+        String userId = jwtutil.getKey(token);
+        return userId != null;
+    }
 
 
     @RequestMapping(value = "api/usuario/{id}", method = RequestMethod.GET)
@@ -26,7 +36,11 @@ public class UserController {
 
 
     @RequestMapping(value = "api/usuarios", method = RequestMethod.GET)
-    public List<Usuario> getUsuarios(){
+    public List<Usuario> getUsuarios(@RequestHeader(value = "Authorization") String token){
+
+        if(!validarToken(token)){
+            return null;
+        }
         return usuariodao.getUsuarios();
     }
 
