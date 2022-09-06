@@ -11,29 +11,29 @@ public class Usuario {
 
     //maven lombok se utilizo para optimizar los getters y los setters
     @Id
-    @Getter @Setter @Column(name = "id_usuario")
+    @Getter @Setter @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long id_usuario;
+    private long id;
 
     @Getter @Setter @Column(name = "nombre")
     private String nombre;
 
-    @Getter @Setter @Column(name = "apellidos")
-    private String apellido;
-
     @Getter @Setter @Column(name = "email")
     private String email;
-
-    @Getter @Setter @Column(name = "telefono")
-    private String telefono;
 
     @Getter @Setter @Column(name = "contraseña")
     private String contraseña;
 
-    public Usuario(String nombre, String apellido, String email, String contraseña) {
+    public Usuario(long id, String nombre, String email, String contraseña) {
+        this.id = id;
         this.nombre = nombre;
-        this.apellido = apellido;
         this.email = email;
+        this.contraseña = contraseña;
+    }
+
+    public Usuario(String email, String nombre, String contraseña) {
+        this.email = email;
+        this.nombre = nombre;
         this.contraseña = contraseña;
     }
 

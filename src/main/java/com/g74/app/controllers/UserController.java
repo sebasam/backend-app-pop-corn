@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @RestController
 public class UserController {
     //hace que la clase usuariodao cre un objeto y lo guarde ahí
